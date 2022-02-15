@@ -9,5 +9,18 @@
         android:id="@+id/startFragment"
         android:name="com.ilker.application1.StartFragment"
         android:label="start_fragment"
-        tools:layout="@layout/start_fragment" />
+        tools:layout="@layout/start_fragment" >
+        <action
+            android:id="@+id/action_startFragment_to_secondFragment"
+            app:destination="@id/secondFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.ilker.application1.SecondFragment"
+        android:label="second_fragment"
+        tools:layout="@layout/second_fragment" />
 </navigation>

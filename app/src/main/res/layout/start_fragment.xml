@@ -11,10 +11,22 @@
         android:layout_height="match_parent"
         tools:context=".StartFragment">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello Start Fragment" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="213dp"
+                android:layout_height="213dp"
+                android:text="Hello Start Fragment" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="191dp"
+                android:layout_height="96dp"
+                android:text="Button" />
+        </LinearLayout>
 
     </FrameLayout>
 </layout>

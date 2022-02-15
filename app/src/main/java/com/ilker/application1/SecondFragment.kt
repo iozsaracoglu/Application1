@@ -7,17 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
-import com.ilker.application1.databinding.StartFragmentBinding
+import com.ilker.application1.databinding.SecondFragmentBinding
 
-class StartFragment : Fragment() {
+class SecondFragment : Fragment() {
 
     companion object {
-        fun newInstance() = StartFragment()
+        fun newInstance() = SecondFragment()
     }
 
-    private lateinit var viewModel: StartViewModel
-    private lateinit var binding: StartFragmentBinding
+    private lateinit var viewModel: SecondViewModel
+    private lateinit var binding: SecondFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,14 +24,14 @@ class StartFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.start_fragment,
+            R.layout.second_fragment,
             container,
             false
         )
-        viewModel = ViewModelProvider(this).get(StartViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SecondViewModel::class.java)
 
         // attach listers
-        binding.button.setOnClickListener { onButtonClicked() }
+        // binding.buttonNext.setOnClickListener { onClickedNext() }
 
         return binding.root
     }
@@ -42,13 +41,14 @@ class StartFragment : Fragment() {
     //     binding.message.text = viewModel.cnt.toString()
     // }
 
-    private fun onButtonClicked() {
-       findNavController().navigate(R.id.action_startFragment_to_secondFragment)
-    }
+    // private fun onClickedNext() {
+    // findNavController().navigate(R.id.action_mainFragment_to_nextFragment)
+    // }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(StartViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SecondViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
