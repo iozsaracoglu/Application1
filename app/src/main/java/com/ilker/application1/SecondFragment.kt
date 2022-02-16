@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import com.ilker.application1.databinding.SecondFragmentBinding
 
 class SecondFragment : Fragment() {
@@ -29,17 +30,25 @@ class SecondFragment : Fragment() {
             false
         )
         viewModel = ViewModelProvider(this).get(SecondViewModel::class.java)
+        binding.button2.setOnClickListener { onClickedButton2() }
 
-        // attach listers
-        // binding.buttonNext.setOnClickListener { onClickedNext() }
+        viewModel.setActivity((activity as MainActivity))
+        viewModel.setCnt()
+        binding.mes.setText("cnt="+viewModel.testCnt.toString())
 
         return binding.root
     }
 
-    // private fun onClicked() {
-    //     viewModel.onClick()
-    //     binding.message.text = viewModel.cnt.toString()
-    // }
+    private fun onClickedButton2() {
+
+        viewModel.addCnt()
+        binding.mes.setText("cnt="+viewModel.testCnt.toString())
+
+        // (activity as MainActivity).myDb
+
+        //viewModel.
+        //binding.message.text = viewModel.cnt.toString()
+    }
 
     // private fun onClickedNext() {
     // findNavController().navigate(R.id.action_mainFragment_to_nextFragment)
