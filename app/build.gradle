@@ -60,4 +60,10 @@ dependencies {
     androidTestImplementation("androidx.navigation:navigation-testing:2.4.1")
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:2.4.1")
+
+    // web services
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+    implementation "com.squareup.okhttp3:okhttp:2.9.0"
 }

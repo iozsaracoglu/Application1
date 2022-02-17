@@ -1,13 +1,12 @@
 package com.ilker.application1
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.ilker.application1.databinding.SecondFragmentBinding
 
 class SecondFragment : Fragment() {
@@ -31,12 +30,18 @@ class SecondFragment : Fragment() {
         )
         viewModel = ViewModelProvider(this).get(SecondViewModel::class.java)
         binding.button2.setOnClickListener { onClickedButton2() }
+        binding.button3.setOnClickListener { onClickedButton3() }
 
         viewModel.setActivity((activity as MainActivity))
         viewModel.setCnt()
         binding.mes.setText("cnt="+viewModel.testCnt.toString())
 
         return binding.root
+    }
+
+    private fun onClickedButton3() {
+        viewModel.executeURL("fdgd", "jdh")
+        binding.textView.setText(viewModel.urlResponse)
     }
 
     private fun onClickedButton2() {
