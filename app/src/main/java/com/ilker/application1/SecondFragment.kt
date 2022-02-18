@@ -15,8 +15,8 @@ class SecondFragment : Fragment() {
         fun newInstance() = SecondFragment()
     }
 
-    private lateinit var viewModel: SecondViewModel
     private lateinit var binding: SecondFragmentBinding
+    private lateinit var viewModel: SecondViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,10 +29,13 @@ class SecondFragment : Fragment() {
             false
         )
         viewModel = ViewModelProvider(this).get(SecondViewModel::class.java)
+
         binding.button2.setOnClickListener { onClickedButton2() }
         binding.button3.setOnClickListener { onClickedButton3() }
 
         viewModel.setActivity((activity as MainActivity))
+        viewModel.setView(this)
+
         viewModel.setCnt()
         binding.mes.setText("cnt="+viewModel.testCnt.toString())
 
@@ -40,7 +43,8 @@ class SecondFragment : Fragment() {
     }
 
     private fun onClickedButton3() {
-        viewModel.executeURL("fdgd", "jdh")
+        viewModel.executeURL("https://android-kotlin-fun-mars-server.appspot.com/",
+            "realestate")
         binding.textView.setText(viewModel.urlResponse)
     }
 
@@ -59,6 +63,9 @@ class SecondFragment : Fragment() {
     // findNavController().navigate(R.id.action_mainFragment_to_nextFragment)
     // }
 
+    fun setTextMessage(msg: String) {
+        binding.textView.setText(msg)
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

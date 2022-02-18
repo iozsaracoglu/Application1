@@ -34,11 +34,23 @@
                 android:layout_height="wrap_content"
                 android:text="Button" />
 
-            <TextView
-                android:id="@+id/textView"
+            <ScrollView
+                android:id="@+id/scrol"
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
-                android:text="TextView" />
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="TextView" />
+                </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
 

@@ -13,6 +13,8 @@ import retrofit2.Response
 class SecondViewModel : ViewModel() {
     lateinit var testCnt: Number
     lateinit var myActivity: MainActivity
+    lateinit var myView: SecondFragment
+
     lateinit var urlResponse: String
 
     init {
@@ -20,6 +22,10 @@ class SecondViewModel : ViewModel() {
 
     fun setActivity(activityIn: MainActivity) {
         myActivity = activityIn
+    }
+
+    fun setView(viewIn: SecondFragment) {
+        myView = viewIn
     }
 
     fun setCnt() {
@@ -35,14 +41,15 @@ class SecondViewModel : ViewModel() {
     fun executeURL(urlStr: String, getStr: String ) {
         Log.i("ilkerDbg", "in the url call")
 
-        urlResponse = TestApi.retrofitService.getProperties().toString()
+        urlResponse = TestApi.retrofitService.getProps(getStr).toString()
         Log.i("ilkerDbg", urlResponse)
 
-        TestApi.retrofitService.getProperties().enqueue(object :Callback<String> {
+        TestApi.retrofitService.getProps(getStr).enqueue(object :Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 Log.i("ilkerDbg", "call Succeeded")
                 urlResponse = response.body().toString()
                 Log.i("ilkerDbg", urlResponse)
+                myView.setTextMessage(urlResponse)
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
