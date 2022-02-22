@@ -3,18 +3,17 @@ package com.ilker.application1
 import android.database.Cursor
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
-//import com.example.android.marsrealestate.network.MarsApi
-
+import com.google.gson.Gson
+import okhttp3.*
+import java.io.IOException
+import java.net.URL
 
 class SecondViewModel : ViewModel() {
     lateinit var testCnt: Number
     lateinit var myActivity: MainActivity
     lateinit var myView: SecondFragment
 
+    var client: OkHttpClient = OkHttpClient();
     lateinit var urlResponse: String
 
     init {
@@ -38,27 +37,53 @@ class SecondViewModel : ViewModel() {
         setCnt()
     }
 
-    fun executeURL(urlStr: String, getStr: String ) {
-        Log.i("ilkerDbg", "in the url call")
+    fun executeHTTP(urlStr: String) {
+        val request: Request = Request.Builder()
+            .url(urlStr)
+            .build()
 
-        urlResponse = TestApi.retrofitService.getProps(getStr).toString()
-        Log.i("ilkerDbg", urlResponse)
-
-        TestApi.retrofitService.getProps(getStr).enqueue(object :Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                Log.i("ilkerDbg", "call Succeeded")
-                urlResponse = response.body().toString()
-                Log.i("ilkerDbg", urlResponse)
-                myView.setTextMessage(urlResponse)
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.i("ilkerDbg", "call Failed")
+                urlResponse = e.message.toString()
+                Log.i("ilkerDbg", e.message.toString())
             }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.i("ilkerDbg", "call Failed")
-                urlResponse = t.message.toString()
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                    Log.i("ilkerDbg", "call Succeeded")
+                    /*for ((name, value) in response.headers) {
+                        //println("$name: $value")
+                        Log.i("ilkerDbg", "$name: $value")
+                    }*/
+                    val json = Gson().toJson(response.body!!.string())
+                    urlResponse = Gson().fromJson(json, String::class.java)
+
+                    myActivity.runOnUiThread(Runnable {
+                        myView.setTextMessage(urlResponse)
+                    })
+                    Log.i("ilkerDbg", urlResponse)
+
+                }
             }
         })
-
-
-
     }
+
+    fun getHTTPRequest(sUrl: String): String? {
+        var result: String? = null
+        try {
+            val url = URL(sUrl)
+            val request = Request.Builder().url(url).build()
+            val response = client
+                .newCall(request)
+                .execute()
+            result = response.body?.string()
+        }
+        catch(err:Error) {
+            Log.i("ilkerDbg", "Error when executing get request: "+err.localizedMessage)
+        }
+        return result
+    }
+
 }

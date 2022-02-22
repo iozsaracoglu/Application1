@@ -11,6 +11,20 @@ import com.ilker.application1.databinding.SecondFragmentBinding
 
 class SecondFragment : Fragment() {
 
+    //var getStr = "realestate"
+    //var getStr = "table.csv?s=MSFT"
+    //var getStr = "finance/quote/TSLA:NASDAQ?window=1M"
+    //var getStr = "query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=1N3JM7DW2NQVFXME&datatype=csv"
+    //var getStr = "https://android-kotlin-fun-mars-server.appspot.com/realestate"
+    //var getStr = "latestPrice?token=pk_5c9f7c4fc75b447e8b12e97c55a1e623"
+    // var getStr = "https://finance.yahoo.com/quote/TECL"
+
+    //var getStr = "https://cloud.iexapis.com/stable/stock/TECL/quote/latestPrice?token=pk_5c9f7c4fc75b447e8b12e97c55a1e623"
+
+    //var getStr = "https://cloud.iexapis.com/stable/stock/TECL/quote?token=pk_5c9f7c4fc75b447e8b12e97c55a1e623&format=csv"
+    var getStr = "https://query1.finance.yahoo.com/v7/finance/download/TECL?period1=1637452800&period2=1645401600&interval=1d&events=history&includeAdjustedClose=true"
+
+
     companion object {
         fun newInstance() = SecondFragment()
     }
@@ -43,28 +57,16 @@ class SecondFragment : Fragment() {
     }
 
     private fun onClickedButton3() {
-        viewModel.executeURL("https://android-kotlin-fun-mars-server.appspot.com/",
-            "realestate")
-        binding.textView.setText(viewModel.urlResponse)
+        viewModel.executeHTTP(getStr)
     }
 
     private fun onClickedButton2() {
-
         viewModel.addCnt()
         binding.mes.setText("cnt="+viewModel.testCnt.toString())
-
-        // (activity as MainActivity).myDb
-
-        //viewModel.
-        //binding.message.text = viewModel.cnt.toString()
     }
 
-    // private fun onClickedNext() {
-    // findNavController().navigate(R.id.action_mainFragment_to_nextFragment)
-    // }
-
-    fun setTextMessage(msg: String) {
-        binding.textView.setText(msg)
+    fun setTextMessage(mes: String) {
+        binding.textView.setText(mes)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

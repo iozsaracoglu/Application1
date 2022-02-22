@@ -7,7 +7,13 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 
-private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com/"
+private const val
+        // BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com/"
+        // BASE_URL = "https://query1.finance.yahoo.com/"
+        // BASE_URL = "http://chart.finance.yahoo.com/"
+        //BASE_URL = "https://www.google.com/finance/quote/"
+        BASE_URL = "https://cloud.iexapis.com/stable/stock/aapl/quote/"
+        //BASE_URL = "https://finance.yahoo.com/quote/"
 
 interface TestApiService {
 

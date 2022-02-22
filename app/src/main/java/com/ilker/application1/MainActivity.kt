@@ -2,9 +2,12 @@ package com.ilker.application1
 
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,10 +27,20 @@ class MainActivity : AppCompatActivity() {
         }
         else Log.i("ilkerDbg", "rows exist already")
 
-
     }
 
     fun getDb(): SQLiteDatabase {
         return myDb
     }
+
+     fun fetchHTTP(sUrl: String): String? {
+        var result: String? = null
+
+        lifecycleScope.launch(Dispatchers.IO) {
+        //    val result = getHTTPRequest(sUrl)
+        }
+        return result.toString()
+    }
+
+
 }
